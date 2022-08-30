@@ -1,25 +1,29 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import "./assets/admin/css/bootstrap.min.css";
-import "./assets/admin/css/atlantis.min.css";
-import "./assets/admin/css/demo.css";
 import Main from "./components/admin/layout/main/main";
 import Login from "./components/frontend/auth/login/login";
 import Register from "./components/frontend/auth/register/register";
+import Seo from "./components/admin/seo/seo";
+import Region from "./components/admin/region/region";
+import Home from "./components/admin/home/home";
+import Blog from "./components/admin/blog/blog";
+import Manager from "./components/admin/manager/manager";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route
-          path="/admin"
-          name="Admin"
-          render={(props) => <Main {...props} />}
-        />
-
         <Route path="/login" element={<Login />} exact />
         <Route path="/register" element={<Register />} exact />
+
+        <Route path="/admin" element={<Main />}>
+          <Route index element={<Home />} exact />
+          <Route path="/admin/region" element={<Region />} exact />
+          <Route path="/admin/seo" element={<Seo />} exact />
+          <Route path="/admin/blog" element={<Blog />} exact />
+          <Route path="/admin/manager" element={<Manager />} exact />
+        </Route>
       </Routes>
     </div>
   );
