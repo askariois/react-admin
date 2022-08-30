@@ -1,13 +1,13 @@
 import React from "react";
 
-const Home = () => {
+const Login = () => {
   return (
     <div className="main-panel">
       <div className="content">
-        <div className="page-inner">Home</div>
+        <div className="page-inner">Login</div>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Login;

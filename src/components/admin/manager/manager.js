@@ -1,13 +1,13 @@
 import React from "react";
 
-const Home = () => {
+const Manager = () => {
   return (
     <div className="main-panel">
       <div className="content">
-        <div className="page-inner">Home</div>
+        <div className="page-inner">Манеджер</div>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Manager;
