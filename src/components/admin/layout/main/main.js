@@ -6,6 +6,7 @@ import Sidebar from "../sidebar/sidebar";
 import "../../../../assets/admin/css/bootstrap.min.css";
 import "../../../../assets/admin/css/atlantis.min.css";
 import "../../../../assets/admin/css/demo.css";
+import "../../../../assets/admin/css/custom.css";
 
 const Main = () => {
   return (
