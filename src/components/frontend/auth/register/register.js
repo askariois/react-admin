@@ -12,11 +12,11 @@ const Register = () => {
     error_list: [],
   });
   const handleInput = (e) => {
-    const target = e.target;
+    e.persist();
 
     setRegister({
       ...registerInput,
-      [target.name]: target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -28,17 +28,17 @@ const Register = () => {
       password: registerInput.password,
     };
     axios.get("/sanctum/csrf-cookie").then((response) => {
-      axios.post("/api/register", data).then((res) => {
+      axios.post("http://spa-laravel.loc/api/register", data).then((res) => {
+        console.log(res.data);
         if (res.data.status === 200) {
           localStorage.setItem("auth_token", res.data.token);
-          localStorage.setItem("auth_name", res.data.email);
+          localStorage.setItem("auth_name", res.data.username);
           swal("Успешно", res.data.message, "success");
           navigate("/admin");
         } else {
-          const dataError = res.data;
           setRegister({
             ...registerInput,
-            error_list: dataError.validation_errors,
+            error_list: res.data.validation_errors,
           });
         }
       });
@@ -51,40 +51,45 @@ const Register = () => {
     : "";
 
   return (
-    <div className="containter">
+    <div className="container">
       <div className="row justify-content-center mt-5">
-        <div className="col-lg-4">
-          <form onSubmit={registerSubmit}>
-            <div className={`form-group ${errorEmailActive}`}>
-              <label>Email </label>
-              <input
-                type="email"
-                name="email"
-                onChange={handleInput}
-                value={registerInput.email}
-                className="form-control"
-                placeholder="Введите email"
-              />
-              <span>{registerInput.error_list.email}</span>
+        <div className="col-lg-5 mt-5">
+          <div className="card">
+            <div className="card-header">
+              <div className="card-title text-center">Регистрация</div>
             </div>
-            <div className={`form-group ${errorPasswordActive}`}>
-              <label>Пароль</label>
-              <input
-                type="password"
-                name="password"
-                onChange={handleInput}
-                value={registerInput.password}
-                className="form-control"
-                placeholder="Введите пароль"
-              />
-              <span>{registerInput.error_list.password}</span>
-            </div>
-            <div className="form-group">
-              <button type="submit" className="btn btn-success">
-                Регистрация
-              </button>
-            </div>
-          </form>
+            <form onSubmit={registerSubmit}>
+              <div className={`form-group ${errorEmailActive}`}>
+                <label>Email </label>
+                <input
+                  type="email"
+                  name="email"
+                  onChange={handleInput}
+                  value={registerInput.email}
+                  className="form-control"
+                  placeholder="Введите email"
+                />
+                <span>{registerInput.error_list.email}</span>
+              </div>
+              <div className={`form-group ${errorPasswordActive}`}>
+                <label>Пароль</label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleInput}
+                  value={registerInput.password}
+                  className="form-control"
+                  placeholder="Введите пароль"
+                />
+                <span>{registerInput.error_list.password}</span>
+              </div>
+              <div className="form-group text-center">
+                <button type="submit" className="btn btn-success">
+                  Регистрация
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

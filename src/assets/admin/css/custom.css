@@ -1,6 +1,47 @@
 body {
+  font-family: "Roboto", sans-serif !important;
   overflow: hidden;
 }
+
+.alert,
+.brand,
+.btn-simple,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.navbar,
+.td-name,
+a,
+body,
+button.close,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+td {
+  font-family: "Roboto", sans-serif !important;
+}
+
 .has-error span {
   color: #f25961 !important;
+}
+
+.logout {
+  font-size: 14px;
+  font-weight: 400;
+  color: #b9babf;
+}
+
+.logout:hover,
+.logout:active,
+.logout:focus {
+  color: #b9bac0 !important;
+  font-weight: bold;
+  text-decoration: none;
 }
