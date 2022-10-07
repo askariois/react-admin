@@ -1,4 +1,4 @@
-import { axios } from "axios";
+import axios from "axios";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
@@ -8,13 +8,15 @@ const Navbar = () => {
 
   const logoutSubmit = (e) => {
     e.preventDefault();
-    axios.post("/api/logout").then((res) => {
-      if (res.data.status === 200) {
-        localStorage.removeItem("auth_token", res.data.token);
-        localStorage.removeItem("auth_name", res.data.username);
-        swal("Успешно", res.data.message, "success");
-        navigate("/admin");
-      }
+    axios.get("/sanctum/csrf-cookie").then((response) => {
+      axios.post("/api/logout").then((res) => {
+        if (res.data.status === 200) {
+          localStorage.removeItem("auth_token");
+          localStorage.removeItem("auth_name");
+          swal("Успешно", res.data.message, "success");
+          navigate("/admin");
+        }
+      });
     });
   };
   return (
